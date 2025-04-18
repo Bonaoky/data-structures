@@ -32,5 +32,49 @@ describe('Stack', () => {
     expect(stack.quantity).toEqual(2);
     expect(stack.storage).toEqual({ 0: 'apple', 1: 'banana'}); // Fix key to 0
   });
+  test('to remove the last property from storage object and decrease the quantity', () => {
+    const stack = createStack();
+    stack.push("apple");
+    stack.push("banana");
+    stack.pop();
+    expect(stack.quantity).toEqual(1);
+    expect(stack.storage).toEqual({ 0: 'apple' }); // Fix key to 0
+  }
+  );
+  test('should throw an error when popping from an empty stack', () => {
+    const stack = createStack();
+    expect(() => stack.pop()).toThrow('Stack underflow');
+  });
+  test('should throw an error when pushing to a full stack', () => {
+    const stack = createStack(2);
+    stack.push("apple");
+    stack.push("banana");
+    expect(() => stack.push("cherry")).toThrow('Stack overflow');
+  });
+  test('should return the size of the stack', () => {
+    const stack = createStack();
+    stack.push("apple");
+    stack.push("banana");
+    expect(stack.size()).toEqual(2);
+  });
+  test('should return true if the stack is empty', () => {
+    const stack = createStack();
+    expect(stack.isEmpty()).toBe(true);
+  });
+  test('should return false if the stack is not empty', () => {
+    const stack = createStack();
+    stack.push("apple");
+    expect(stack.isEmpty()).toBe(false);
+  });
+  test('should return the top element of the stack without removing it', () => {
+    const stack = createStack();
+    stack.push("apple");
+    stack.push("banana");
+    expect(stack.peek()).toEqual("banana");
+  });
+  test('should throw an error when peeking an empty stack', () => {
+    const stack = createStack();
+    expect(() => stack.peek()).toThrow('Stack is empty');
+  });
 
 });

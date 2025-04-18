@@ -7,6 +7,30 @@ const stackPrototype = {
     throw new Error('Stack overflow');
   }
 }
+,
+  pop() {
+    if (this.quantity > 0) {
+      this.quantity--;
+      const value = this.storage[this.quantity];
+      delete this.storage[this.quantity];
+      return value;
+    } else {
+      throw new Error('Stack underflow');
+    }
+  },
+  size() {
+    return this.quantity;
+  },
+  isEmpty() {
+    return this.quantity === 0;
+  },
+  peek() {
+    if (this.quantity > 0) {
+      return this.storage[this.quantity - 1];
+    } else {
+      throw new Error('Stack is empty');
+    }
+  }
 };
 
 function createStack(maxSize = 5) {
